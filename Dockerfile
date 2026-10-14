@@ -3,7 +3,7 @@
 # 2. Dependencies before code          -> build cache works
 # 3. Non-root user                     -> limits damage if compromised
 # 4. Data directory owned by that user -> the volume in the lab is writable
-FROM python:3.12-slim
+FROM python:3.12-slim@sha256:a6e34c598f2467ed0e9a8d349809fcd8b5c603269512df273a0bb1784edc11b1
 
 WORKDIR /app
 

@@ -13,6 +13,7 @@ Configuration comes from environment variables (12-factor style):
 """
 import os
 from pathlib import Path
+import random
 
 from flask import Flask, jsonify, request
 
@@ -30,6 +31,36 @@ def _counter_file() -> Path:
 @app.get("/health")
 def health():
     return jsonify(status="ok")
+
+
+@app.get("/info")
+def info():
+    return jsonify(
+        app="ceng413-hw1",
+        version="1.0",
+        framework="Flask"
+    )
+
+
+@app.get("/motivation")
+def motivation():
+    messages = [
+        "Bugün harika şeyler başarabilirsin! ✨",
+        "Kendine inan, düşündüğünden daha güçlüsün. 💛",
+        "Küçük adımlar da seni ileriye götürür. 🌱",
+        "Her yeni gün yeni bir başlangıçtır. ☀️",
+        "Kendi hızında ilerlemen de ilerlemektir. 🌷",
+        "Bugün kendine biraz daha nazik davran. 🫶",
+        "Hayallerin için attığın her adım değerlidir. 🌟",
+        "Her şeyi bugün çözmek zorunda değilsin. 🍀",
+        "Başlamak için mükemmel olmak zorunda değilsin. 🚀",
+        "Güzel şeyler bazen hiç beklemediğin anda gelir. 🌈",
+        "Kendinle gurur duymak için küçük bir neden bul. 💖",
+        "Bugün yeni bir şey öğrenmek için harika bir gün. 📚",
+    ]
+
+    return jsonify(message=random.choice(messages))
+
 
 
 @app.get("/greet")

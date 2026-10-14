@@ -30,3 +30,23 @@ def test_greet_name(client):
 def test_visit_counts_up(client):
     assert client.get("/visit").get_json() == {"visits": 1}
     assert client.get("/visit").get_json() == {"visits": 2}
+
+
+def test_info(client):
+    r = client.get("/info")
+    assert r.status_code == 200
+    assert r.get_json() == {
+        "app": "ceng413-hw1",
+        "version": "1.0",
+        "framework": "Flask",
+    }
+
+
+def test_motivation(client):
+    r = client.get("/motivation")
+    assert r.status_code == 200
+
+    data = r.get_json()
+    assert "message" in data
+    assert isinstance(data["message"], str)
+    assert len(data["message"]) > 0
